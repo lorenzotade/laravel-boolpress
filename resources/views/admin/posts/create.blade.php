@@ -15,12 +15,18 @@
 
       <div class="mb-3">
         <label for="title" class="label-control">Title:</label>
-        <input type="text" name="title" id="title" class="form-control">
+        <input type="text" name="title" id="title" value="{{old('title')}}" class="form-control @error('title') is-invalid @enderror">
+        @error('title')
+          <span class="invalid-feedback">{{$message}}</span>
+        @enderror
       </div>
 
       <div class="mb-3">
         <label for="description" class="label-control">Description:</label>
-        <textarea name="description" id="description" rows="4" class="form-control"></textarea>
+        <textarea name="description" id="description" rows="4" class="form-control @error('description') is-invalid @enderror">{{old('description')}}</textarea>
+        @error('description')
+          <span class="invalid-feedback">{{$message}}</span>
+        @enderror
       </div>
 
       <button type="submit" class="btn btn-primary">SUBMIT</button>

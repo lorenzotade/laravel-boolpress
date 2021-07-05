@@ -25,7 +25,8 @@ class PostRequest extends FormRequest
     {
         return [
             'title' => 'required|max:255',
-            'description' => 'required|min:3'
+            'description' => 'required|min:3',
+            'category_id' => 'nullable|exists:categories,id'
         ];
     }
 
@@ -35,7 +36,8 @@ class PostRequest extends FormRequest
             'title.required' => 'Per favore inserisci un titolo.',
             'title.max' => 'Il titolo non può essere più lungo di :max caratteri.',
             'description.required' => 'Per favore inserisci il corpo del post.',
-            'description.min' => 'Il corpo del post deve essere lungo almeno :min caratteri.'
+            'description.min' => 'Il corpo del post deve essere lungo almeno :min caratteri.',
+            'category_id.exists' => 'Categoria selezionata non valida.'
         ];
     }
 }

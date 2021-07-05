@@ -21,6 +21,7 @@
         <tr>
           <th>ID</th>
           <th>Title</th>
+          <th>Category</th>
           <th colspan="3">Actions</th>
         </tr>
 
@@ -32,6 +33,11 @@
           <tr>
             <td>{{$post->id}}</td>
             <td>{{$post->title}}</td>
+            @if ($post->category)
+              <td>{{$post->category->name}}</td>
+            @else
+              <td>-</td>
+            @endif
             <td><a href="{{route('admin.posts.show', $post)}}" class="btn btn-primary">SHOW</a></td>
             <td><a href="{{route('admin.posts.edit', $post)}}" class="btn btn-secondary">EDIT</a></td>
             <td>

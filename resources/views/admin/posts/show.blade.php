@@ -8,6 +8,13 @@
 
     <h1>{{$post->title}}</h1>
 
+    @if ($post->category)
+      <h3>Categoria: {{$post->category->name}}</h3>
+    @else
+      <h3>Nessuna categoria.</h3>
+    @endif
+    
+
     <p>{{$post->description}}</p>
 
     <a href="{{route('admin.posts.edit', $post)}}" class="btn btn-primary">EDIT</a>

@@ -35,6 +35,26 @@
     </div>
 
     <div class="mb-3">
+      <h6>Tag</h6>
+      @foreach ($tags as $tag)
+        <span class="d-inline-block mr-3">
+          <input type="checkbox"
+            id="tag{{$loop->iteration}}"
+            value="{{$tag->id}}"
+            name="tags[]"
+            @if ($errors->any() && in_array($tag->id, old('tags', []))) checked 
+            @elseif (!$errors->any() && $post->tags->contains($tag->id)) checked
+            @endif
+          >
+          <label for="tag{{$loop->iteration}}">{{$tag->name}}</label>
+        </span>
+      @endforeach
+      @error('tags')
+        <span class="invalid-feedback">{{$message}}</span>
+      @enderror
+    </div>
+
+    <div class="mb-3">
       <label for="description" class="label-control">Description:</label>
       <textarea name="description" id="description" rows="4" class="form-control @error('description') is-invalid @enderror">{{old('description', $post->description)}}</textarea>
       @error('description')

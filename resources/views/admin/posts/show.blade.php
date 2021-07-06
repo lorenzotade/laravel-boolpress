@@ -8,6 +8,13 @@
 
     <h1>{{$post->title}}</h1>
 
+    <div class="my-2">
+      @foreach ($post->tags as $tag)
+        <span class="badge badge-primary">{{$tag->name}}</span>
+      @endforeach
+
+    </div>
+
     @if ($post->category)
       <h3>Categoria: {{$post->category->name}}</h3>
     @else

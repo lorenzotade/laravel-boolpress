@@ -26,7 +26,8 @@ class PostRequest extends FormRequest
         return [
             'title' => 'required|max:255',
             'description' => 'required|min:3',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
         ];
     }
 
@@ -37,7 +38,8 @@ class PostRequest extends FormRequest
             'title.max' => 'Il titolo non può essere più lungo di :max caratteri.',
             'description.required' => 'Per favore inserisci il corpo del post.',
             'description.min' => 'Il corpo del post deve essere lungo almeno :min caratteri.',
-            'category_id.exists' => 'Categoria selezionata non valida.'
+            'category_id.exists' => 'Categoria selezionata non valida.',
+            'tags.exists' => 'Nessun tag presente con questo valore.'
         ];
     }
 }

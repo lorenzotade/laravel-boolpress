@@ -23,10 +23,10 @@ export default {
     }
   },
   mounted() {
-    axios.get('http://127.0.0.1:8000/api/posts' + this.$route.params.slug)
+    axios.get('http://127.0.0.1:8000/api/posts/' + this.$route.params.slug)
       .then(res => {
         if (res.data.success) {
-          this.post = res.data.result;
+          this.post = res.data.data;
         } else {
           this.$router.push({name: 'error404'});
         }

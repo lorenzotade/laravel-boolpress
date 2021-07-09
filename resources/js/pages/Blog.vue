@@ -1,25 +1,37 @@
 <template>
   <main class="container mt-4">
+
+    <h1>I miei post</h1>
+
     <div 
-      class="card mb-4"
+      class="loader-container"
+      v-if="!loaded"
+    >
+      <Loader />
+    </div>
+
+    <div 
+      class="card-container"
+      v-else
       v-for="post in posts" :key="'p'+post.id"
     >
-      <div class="card-body">
-        <h4 class="card-title">{{post.title}}</h4>
-        <h6 class="card-title">{{post.category}}</h6>
-        <p class="card-text">{{post.description}}</p>
-        <a href="#" class="btn btn-primary">Go...</a>
-      </div>
+      <Card 
+        :title="post.title"
+        :category="post.category"
+        :description="post.description"
+        :date="post.date"
+        :slug="post.slug"
+      />
     </div>
 
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         <li 
           class="page-item"
+          :class="{'disabled': pagination.current === 1}"
         >
             <button 
               class="page-link"
-              :class="{'disabled': pagination.current === 1}"
               @click="getPosts(pagination.current - 1)"
             >Previous
             </button>
@@ -39,10 +51,10 @@
 
         <li 
           class="page-item"
+          :class="{'disabled': pagination.current === pagination.last}"
         >
             <button 
               class="page-link"
-              :class="{'disabled': pagination.current === pagination.last}"
               @click="getPosts(pagination.current + 1)"
             >Next
             </button>
@@ -56,17 +68,25 @@
 <script>
 
 import axios from 'axios';
+import Loader from '../components/Loader.vue'
+import Card from '../components/Card.vue'
 
 export default {
   name: 'Blog',
+  components: {
+    Loader,
+    Card
+  },
   data() {
     return {
       posts: [],
-      pagination: {}
+      pagination: {},
+      loaded: false
     }
   },
   methods: {
     getPosts(page = 1) {
+      this.loaded = false;
       axios.get('http://127.0.0.1:8000/api/posts', {
         params: {
           page: page
@@ -82,6 +102,7 @@ export default {
         .catch(err => {
           console.log(err);
         });
+        this.loaded = true;
     }
   },
   created() {

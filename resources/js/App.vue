@@ -15,18 +15,6 @@ export default {
   name: 'App',
   components: {
     Header
-  },
-  data() {
-    return {
-      
-    }
-  },
-  methods: {
-    
-   
-  },
-  created() {
-   
   }
 }
 </script>
